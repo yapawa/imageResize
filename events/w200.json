@@ -1,0 +1,12 @@
+{
+  "resource": "/{albumId}/{photoId}/{filename}/{version}/{transformations}/{imageName}",
+  "path": "/f4235119-3fac-74b1-c860-05aa988188ba/5ae12614-1306-a9d7-68b3-1c52968ed4dc/DSC_4511.jpg/0/w_200/dsc_4511.jpg",
+  "httpMethod": "GET",
+  "pathParameters": {
+    "albumId": "f4235119-3fac-74b1-c860-05aa988188ba",
+    "photoId": "5ae12614-1306-a9d7-68b3-1c52968ed4dc",
+    "filename": "DSC_4511.jpg",
+    "imageName": "dsc_4511.jpg",
+    "transformations": "w_200"
+  }
+}
