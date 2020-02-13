@@ -1,0 +1,39 @@
+{
+  "name": "YapawaImages",
+  "version": "0.0.1",
+  "description": "Generate resized images",
+  "main": "handler.js",
+  "scripts": {
+    "test": "npm run lint",
+    "lint": "eslint .",
+    "lintfix": "eslint --fix",
+    "deploy": "npm run lint && sls -s production deploy",
+    "dev": "npm run lint && sls deploy"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "aws-sdk": "^2.617.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-source-map-support": "^2.1.1",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "js-yaml": "^3.13.1",
+    "lodash": "^4.17.15",
+    "serverless": "^1.63.0",
+    "serverless-deployment-bucket": "^1.1.0",
+    "serverless-pseudo-parameters": "^2.5.0",
+    "serverless-webpack": "^5.3.1",
+    "webpack": "^4.41.6",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "dependencies": {
+    "lambda-log": "^2.3.1"
+  }
+}
