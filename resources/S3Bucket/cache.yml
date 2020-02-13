@@ -1,0 +1,36 @@
+Type: AWS::S3::Bucket
+Properties:
+  BucketName: ${self:custom.stage.cacheBucket}
+  AccessControl: Private
+  PublicAccessBlockConfiguration:
+    BlockPublicAcls: false
+    BlockPublicPolicy: true
+    IgnorePublicAcls: false
+    RestrictPublicBuckets: true
+  WebsiteConfiguration:
+    IndexDocument: index.html
+    ErrorDocument: error.html
+    RoutingRules:
+    - RoutingRuleCondition:
+        HttpErrorCodeReturnedEquals: 403
+      RedirectRule:
+        HttpRedirectCode: 307
+        ReplaceKeyPrefixWith:
+          Fn::Join:
+            - ''
+            - - ${self:provider.stage}
+              - "/"
+        HostName:
+          Fn::Join:
+          - ''
+          - - Ref: ApiGatewayRestApi
+            - ".execute-api."
+            - Ref: AWS::Region
+            - "."
+            - Ref: AWS::URLSuffix
+        Protocol: https
+Outputs:
+  cacheBucketName:
+    Description: "Cache Bucket Name"
+    Value:
+      Ref: S3BucketCache
