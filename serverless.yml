@@ -29,7 +29,7 @@ provider:
   deploymentBucket:
     name: com.serverless.${self:custom.stage.profile}.${self:provider.region}.deploys
   endpointType: edge
-  apiName: ${self:service}{self:custom.stage.suffix}
+  apiName: ${self:service}${self:custom.stage.suffix}
   apigateway:
     description: Yapawa imageResize
 
