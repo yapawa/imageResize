@@ -1,14 +1,29 @@
-# you can add statements to the Lambda function's IAM Role here
-#  - Effect: "Allow"
-#    Action:
-#      - "s3:ListBucket"
-#    Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#  - Effect: "Allow"
-#    Action:
-#      - "s3:PutObject"
-#    Resource:
-#      Fn::Join:
-#        - ""
-#        - - "arn:aws:s3:::"
-#          - "Ref" : "ServerlessDeploymentBucket"
-#          - "/*"
+- Effect: "Allow"
+  Action:
+    - "s3:ListBucket"
+  Resource:
+    Fn::Join:
+      - ""
+      - - "arn:aws:s3:::"
+        - ${self:custom.stage.cacheBucket}
+- Effect: "Allow"
+  Action:
+    - "s3:PutObject"
+    - "s3:PutObjectAcl"
+    - "s3:GetObject"
+    - "s3:DeleteObject"
+  Resource:
+    Fn::Join:
+      - ""
+      - - "arn:aws:s3:::"
+        - ${self:custom.stage.cacheBucket}
+        - "/*"
+- Effect: "Allow"
+  Action:
+    - "s3:GetObject"
+  Resource:
+    Fn::Join:
+      - ""
+      - - "arn:aws:s3:::"
+        - ${self:custom.stage.srcBucket}
+        - "/*"

@@ -11,14 +11,20 @@ Edit *config/dev.yml* and *config/production.yml* to suit your needs.
 
 Run `nvm use` to load the right node version and `npm install` to install all the dependencies.
 
+### Environment variables
+- cacheBucket: Bucket name to hold cached images
+- srcBucket: Bucket holding originals as created by [Amplify](https://github.com/photos-manager)
+- srcPrefix: Prefix for stored images without trailing slash (_public_ by default)
+
 ## URL Format
 Inspired from [Cloudinary](https://cloudinary.com/documentation/image_transformations#transforming_media_assets_using_dynamic_urls) and [ImageKit](https://docs.imagekit.io/features/image-transformations)
 ```
-https://{domain}/{albumSlug}/{photoId}/{version}/{transformations}/{name}.{format}
+https://{domain}/{albumId}/{photoId}/{filename}/{version}/{transformations}/{name}.{format}
 ```
 - domain: Cloudfront domain
-- albumSlug: For helping with SEO
-- photoId: ID from Yapawa's photo table. Needed to retrieve the source file key
+- albumId: The AlbumId of the photo
+- photoId: The Id ID of the photo
+- filename: Photo source filename
 - version: allows cache busting
 - transformations: see [Cloudinary](https://cloudinary.com/documentation/image_transformation_reference)
   - w: width in pixels
@@ -34,7 +40,7 @@ https://{domain}/{albumSlug}/{photoId}/{version}/{transformations}/{name}.{forma
   - g: gravity (default _center_), valid values are: `top`, `right top`, `right`, `right bottom`, `bottom`, `left bottom`, `left`, `left top`, `north`, `northeast`, `east`, `southeast`, `south`, `southwest`, `west`, `northwest`, `center` or `centre`.
   - dpr: Changes image size to match dpr
   - bg: Background color (RGB code) when crop mode is _pad_, default _black_
-- name: Photo slug. Used mainly for SEO
+- name: Photo slug
 - format: output format (_jpg, jpeg, png or webp_)
 
 ## Project template

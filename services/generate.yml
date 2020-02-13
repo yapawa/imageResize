@@ -1,0 +1,24 @@
+handler: services/generate.handler
+name: ${self:service}-generate${self:custom.stage.suffix}
+environment:
+  srcBucket: ${self:custom.stage.srcBucket}
+  cacheBucket: ${self:custom.stage.cacheBucket}
+  cacheDomain:
+    Fn::GetAtt:
+      - CloudFrontCache
+      - DomainName
+  srcPrefix: ${self:custom.stage.photoTable, 'public'}
+dependsOn:
+  - CloudFrontCache
+events:
+  - http:
+      path: "{albumId}/{photoId}/{filename}/{version}/{transformations}/{imageName}"
+      method: GET
+      cors: true
+      parameters:
+        paths:
+          albumId: true
+          photoId: true
+          filename: true
+          transformations: true
+          imageName: true
