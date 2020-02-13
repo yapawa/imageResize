@@ -37,3 +37,4 @@ Properties:
       ErrorCode: 403
     - ErrorCachingMinTTL: 10
       ErrorCode: 404
+    Comment: ${self:service}${self:custom.stage.suffix}
