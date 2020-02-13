@@ -38,3 +38,4 @@ Properties:
     - ErrorCachingMinTTL: 10
       ErrorCode: 404
     Comment: ${self:service}${self:custom.stage.suffix}
+    HttpVersion: http2
