@@ -31,8 +31,8 @@ https://{domain}/{albumId}/{photoId}/{filename}/{version}/{transformations}/{nam
   - h: height in pixels
   - c: crop mode
     - scale: Resizes the image to exactly match the width and height, changing the aspect ratio.
-    - crop: Resizes and crops the image to width and height. Cropped area depends on gravity.
-    - fit: Resizes the image to fit inside width and height (_default_).
+    - crop: Resizes and crops the image to width and height. Cropped area depends on gravity. (_default when both dimensions is passed_)
+    - fit: Resizes the image to fit inside width and height (_default when only one dimension is passed_).
     - fill: Resizes the image to cover both width and height.
     - pad: Resizes the image to fit inside width and height and add padding to match width and height.
     - cover: Crops the image to width and height. Cropped area depends on gravity.
