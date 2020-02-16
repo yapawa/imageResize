@@ -91,9 +91,9 @@ const getFormat = filename => {
 const getSrcKey = async (albumId, photoId, filename) => {
   return [
     SrcPrefix,
-    albumId,
-    photoId,
-    filename
+    decodeURI(albumId),
+    decodeURI(photoId),
+    decodeURI(filename)
   ].join('/')
 }
 
