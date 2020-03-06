@@ -199,6 +199,7 @@ const buildResizeOptions = (transf) => {
   if (transf.c === 'contain' && transf.bg) {
     resizeOptions.background = `#${transf.bg}`
   }
+  resizeOptions.withoutEnlargement = true
   log.info('buildResizeOptions::after', { transf, resizeOptions })
   return resizeOptions
 }
