@@ -16,11 +16,11 @@ const path = require('path')
 module.exports.handler = async (event) => {
   log.info('Event', { event, env: process.env })
 
-  const albumId = event.pathParameters.albumId
-  const photoId = event.pathParameters.photoId
-  const filename = event.pathParameters.filename
-  const transformations = event.pathParameters.transformations
-  const imageName = event.pathParameters.imageName
+  const albumId = decodeURIComponent(event.pathParameters.albumId)
+  const photoId = decodeURIComponent(event.pathParameters.photoId)
+  const filename = decodeURIComponent(event.pathParameters.filename)
+  const transformations = decodeURIComponent(event.pathParameters.transformations)
+  const imageName = decodeURIComponent(event.pathParameters.imageName)
   const cacheKey = decodeURIComponent(event.path).slice(1)
 
   log.info('Path', { transformations, photoId })
