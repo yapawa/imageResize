@@ -185,6 +185,9 @@ const buildResizeOptions = (transf) => {
     resizeOptions.fit = transf.c
   } else {
     delete transf.c
+    if (transf.g) {
+      resizeOptions.position = transf.g
+    }
   }
 
   if (transf.w) {
