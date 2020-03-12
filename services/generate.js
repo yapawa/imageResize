@@ -26,7 +26,6 @@ module.exports.handler = async (event) => {
   log.info('Path', { transformations, photoId })
 
   const transf = parseTransformations(transformations)
-  const resizeOptions = buildResizeOptions(transf)
   const format = getFormat(imageName)
   const srcKey = await getSrcKey(albumId, photoId, filename)
 
@@ -42,12 +41,26 @@ module.exports.handler = async (event) => {
         statusCode: 404
       }
     })
-    .then(data => Sharp(data.Body)
-      .rotate()
-      .resize(resizeOptions)
-      .toFormat(format)
-      .toBuffer()
-    )
+    .then(data => {
+      return Sharp(data.Body).rotate()
+    })
+    .then(image => {
+      return image.metadata()
+        .then(metadata => {
+          return {
+            image,
+            width: metadata.width,
+            height: metadata.height
+          }
+        })
+    })
+    .then(({ image, width, height }) => {
+      const resizeOptions = buildResizeOptions(transf, width, height)
+      return image
+        .resize(resizeOptions)
+        .toFormat(format)
+        .toBuffer()
+    })
     .then(buffer => {
       const s3Params = {
         Bucket: CacheBucket,
@@ -154,7 +167,7 @@ const parseTransformations = (transformations) => {
   return transf
 }
 
-const buildResizeOptions = (transf) => {
+const buildResizeOptions = (transf, srcWidth, srcHeight) => {
   let height = null
   let width = null
 
@@ -191,6 +204,23 @@ const buildResizeOptions = (transf) => {
   }
 
   if (transf.w) {
+    if (transf.w > srcWidth) {
+      if (transf.h) {
+        transf.h = Math.round(transf.h * srcWidth / transf.w)
+      }
+      transf.w = srcWidth
+    }
+  }
+  if (transf.h) {
+    if (transf.h > srcHeight) {
+      if (transf.w) {
+        transf.w = Math.round(transf.w * srcHeight / transf.h)
+      }
+      transf.h = srcHeight
+    }
+  }
+
+  if (transf.w) {
     resizeOptions.width = Math.round(transf.w)
   }
   if (transf.h) {
@@ -202,7 +232,7 @@ const buildResizeOptions = (transf) => {
   if (transf.c === 'contain' && transf.bg) {
     resizeOptions.background = `#${transf.bg}`
   }
-  resizeOptions.withoutEnlargement = true
+
   log.info('buildResizeOptions::after', { transf, resizeOptions })
   return resizeOptions
 }
