@@ -15,15 +15,10 @@ Properties:
         HttpErrorCodeReturnedEquals: 403
       RedirectRule:
         HttpRedirectCode: 307
-        ReplaceKeyPrefixWith:
-          Fn::Join:
-            - ''
-            - - ${self:provider.stage}
-              - "/"
         HostName:
           Fn::Join:
           - ''
-          - - Ref: ApiGatewayRestApi
+          - - Ref: HttpApi
             - ".execute-api."
             - Ref: AWS::Region
             - "."

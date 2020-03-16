@@ -11,14 +11,6 @@ environment:
 dependsOn:
   - CloudFrontCache
 events:
-  - http:
-      path: "{albumId}/{photoId}/{filename}/{version}/{transformations}/{imageName}"
+  - httpApi:
+      path: "/{albumId}/{photoId}/{filename}/{version}/{transformations}/{imageName}"
       method: GET
-      cors: true
-      parameters:
-        paths:
-          albumId: true
-          photoId: true
-          filename: true
-          transformations: true
-          imageName: true

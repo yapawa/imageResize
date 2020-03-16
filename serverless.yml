@@ -28,10 +28,9 @@ provider:
   iamRoleStatements: ${file(config/iamRoleStatements.yml)}
   deploymentBucket:
     name: com.serverless.${self:custom.stage.profile}.${self:provider.region}.deploys
-  endpointType: edge
   apiName: ${self:service}${self:custom.stage.suffix}
-  apigateway:
-    description: Yapawa imageResize
+  httpApi:
+    cors: true
 
 functions: ${file(lib/config.js):functions}
 resources:
