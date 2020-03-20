@@ -3,10 +3,7 @@ name: ${self:service}-generate${self:custom.stage.suffix}
 environment:
   srcBucket: ${self:custom.stage.srcBucket}
   cacheBucket: ${self:custom.stage.cacheBucket}
-  cacheDomain:
-    Fn::GetAtt:
-      - CloudFrontCache
-      - DomainName
+  cacheDomain: ${self:custom.domainName}
   srcPrefix: ${self:custom.stage.photoTable, 'public'}
 dependsOn:
   - CloudFrontCache

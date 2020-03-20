@@ -4,6 +4,9 @@ suffix: "-dev"
 cacheBucket: myCacheBucketName
 srcBucket: myOriginalsBucket
 srcPrefix: public/
+domainName: img.yapawa.net
+hostedZoneId: myHostedZoneId
+certificateArn: arn:aws:acm:us-east-1:444444444444:certificate/af6836cc-b82d-4a93-a230-9bc371b40418
 lambda:
   memorySize: 1024
   timeout: 30

@@ -1,0 +1,16 @@
+Type: AWS::Route53::RecordSetGroup
+Properties:
+  HostedZoneId: ${self:custom.hostedZoneId}
+  RecordSets:
+    - Name: ${self:custom.domainName}
+      Type: A
+      AliasTarget:
+        HostedZoneId: Z2FDTNDATAQYW2
+        DNSName:
+          Fn::GetAtt: [CloudFrontCache, DomainName]
+    - Name: ${self:custom.domainName}
+      Type: AAAA
+      AliasTarget:
+        HostedZoneId: Z2FDTNDATAQYW2
+        DNSName:
+          Fn::GetAtt: [CloudFrontCache, DomainName]

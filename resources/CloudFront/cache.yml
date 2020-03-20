@@ -3,6 +3,12 @@ DependsOn:
 - S3BucketCache
 Properties:
   DistributionConfig:
+    Aliases:
+      - ${self:custom.domainName}
+    ViewerCertificate:
+      AcmCertificateArn: ${self:custom.certificateArn}
+      MinimumProtocolVersion: TLSv1.2_2018
+      SslSupportMethod: sni-only
     Origins:
     - DomainName:
         Fn::Select:
