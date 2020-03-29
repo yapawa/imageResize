@@ -4,7 +4,7 @@ suffix: ""
 cacheBucket: myCacheBucketName
 srcBucket: myOriginalsBucket
 srcPrefix: public
-domainName: img.yapawa.net
+domainName: img.gallery.example.com
 hostedZoneId: myHostedZoneId
 certificateArn: arn:aws:acm:us-east-1:444444444444:certificate/af6836cc-b82d-4a93-a230-9bc371b40418
 lambda:
