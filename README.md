@@ -43,27 +43,79 @@ https://{domain}/{albumId}/{photoId}/{filename}/{version}/{transformations}/{nam
 - name: Photo slug
 - format: output format (_jpg, jpeg, png or webp_)
 
-## Project template
-Based on [serverless-template-aws-webpack-nodejs](https://github.com/Spuul/serverless-template-aws-webpack-nodejs/tree/master/)
-
-## File structure
-- **events/**  
-  Store all events related to testing
-- **lib/config.js**  
-  Javascript module to build serverless.yml
-- **resources/**  
-  Contains yml files describing each resource. Definitions can be nested 2 levels deep, in a subfolder describing the AWS resource, like `IamRole/specificServiceRole.yml`.
-  The folder name is expected to follow [Serverless convention](https://serverless.com/framework/docs/providers/aws/guide/resources#aws-cloudformation-resource-reference) for naming.
-- **services/**  
-  Contains each individual Lambda function (.js) and it's definitions (.yml).
-  In addition to the usual *handler* and *event* definitions, the yml can also hold a specific *resource* definition related to the function, without the need for an entry in the *resources/* folder.
-- **stages/**  
-  Stage specific configurations.
-
 ## Deploy
 `sls deploy` (development) or `sls -s production deploy`
 
-## Logging
+## Drawbacks
+- No auto detection on DPR, client needs to know it's DPR.
+
+    This can be done using Javascript:
+
+    ```javascript
+    let dpr = 1
+    if (devicePixelRatio) {
+      dpr = devicePixelRatio
+    } else if (window.devicePixelRatio) {
+      dpr = window.devicePixelRatio
+    }
+    dpr = parseFloat(parseFloat(dpr).toFixed(1))
+    ```
+- No auto detection on supported formats: client needs to know if he can display webp.
+
+    This can be done using Javascript:
+
+    ```javascript
+    let supportsWebp = false
+    if (!self.createImageBitmap) {
+      supportsWebp = false
+    }
+    const webpData = 'data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA='
+    return fetch(webpData).then(r => {
+      return r.blob().then(blob => {
+        return createImageBitmap(blob).then(() => {
+          supportsWebp = true
+        }, () => {
+          supportsWebp = false
+        })
+      })
+    })
+    ```
+- No normalization for transformations
+    - `/w_100,h_100/` and `/w_101,h_100/` will generate different files in S3 and execute lambda twice
+    - `/w_100,h_100/` and `/h_100,w_100/` will generate different files in S3 and execute lambda twice
+
+    This can be mitigated by using size names instead of pixels:
+
+      - `/s_medium/` would tell Lambda to generate an image of 128x128
+- Works only with clients following redirection
+    Not really a problem, your client is a browser, and all of them follow redirection
+
+## Alternatives
+### Lambda@Edge based
+* [cloudfront-image-proxy](https://github.com/skorfmann/cloudfront-image-proxy/)
+
+### Commercial
+* [Cloudinary](https://cloudinary.com/)
+* [Imagekit](https://imagekit.io/)
+
+## Project template
+Based on [serverless-template-aws-webpack-nodejs](https://github.com/Spuul/serverless-template-aws-webpack-nodejs/tree/master/)
+
+### File structure
+- **events/**
+  Store all events related to testing
+- **lib/config.js**
+  Javascript module to build serverless.yml
+- **resources/**
+  Contains yml files describing each resource. Definitions can be nested 2 levels deep, in a subfolder describing the AWS resource, like `IamRole/specificServiceRole.yml`.
+  The folder name is expected to follow [Serverless convention](https://serverless.com/framework/docs/providers/aws/guide/resources#aws-cloudformation-resource-reference) for naming.
+- **services/**
+  Contains each individual Lambda function (.js) and it's definitions (.yml).
+  In addition to the usual *handler* and *event* definitions, the yml can also hold a specific *resource* definition related to the function, without the need for an entry in the *resources/* folder.
+- **stages/**
+  Stage specific configurations.
+
+### Logging
 [lambda-log](https://www.npmjs.com/package/lambda-log) provides a more structured way of logging:
 ```javascript
 const log = require('lambda-log')
