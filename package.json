@@ -13,28 +13,28 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "aws-sdk": "^2.659.0",
+    "@babel/core": "^7.11.1",
+    "aws-sdk": "^2.728.0",
     "babel-loader": "^8.1.0",
-    "babel-plugin-source-map-support": "^2.1.1",
+    "babel-plugin-source-map-support": "^2.1.2",
     "babel-preset-env": "^1.7.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.6.0",
     "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "js-yaml": "^3.13.1",
+    "js-yaml": "^3.14.0",
     "lodash": "^4.17.19",
-    "serverless": "^1.67.3",
+    "serverless": "^1.78.1",
     "serverless-deployment-bucket": "^1.1.2",
     "serverless-pseudo-parameters": "^2.5.0",
-    "serverless-webpack": "^5.3.1",
-    "webpack": "^4.42.1",
-    "webpack-node-externals": "^1.7.2"
+    "serverless-webpack": "^5.3.3",
+    "webpack": "^4.44.1",
+    "webpack-node-externals": "^2.5.0"
   },
   "dependencies": {
-    "lambda-log": "^2.3.1",
-    "sharp": "^0.25.2"
+    "lambda-log": "^2.4.0",
+    "sharp": "^0.25.4"
   }
 }
