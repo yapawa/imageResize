@@ -7,7 +7,7 @@ Properties:
       - ${self:custom.domainName}
     ViewerCertificate:
       AcmCertificateArn: ${self:custom.certificateArn}
-      MinimumProtocolVersion: TLSv1.2_2018
+      MinimumProtocolVersion: TLSv1.2_2019
       SslSupportMethod: sni-only
     Origins:
     - DomainName:
