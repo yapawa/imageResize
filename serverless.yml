@@ -35,6 +35,7 @@ provider:
   apiName: ${self:service}${self:custom.stage.suffix}
   httpApi:
     cors: true
+    payload: '1.0'
 
 functions: ${file(lib/config.js):functions}
 resources:
