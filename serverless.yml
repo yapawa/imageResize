@@ -1,5 +1,5 @@
 service: YapawaImages
-frameworkVersion: ">=1.37.1 <2.0.0"
+frameworkVersion: "3.22.0"
 
 custom:
   stage: ${file(stages/${opt:stage, self:provider.stage}.yml)}
@@ -14,7 +14,6 @@ custom:
 
 plugins:
   - serverless-deployment-bucket
-  - serverless-pseudo-parameters
   - serverless-webpack
 
 package:
@@ -22,20 +21,20 @@ package:
 
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs16.x
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, self:custom.stage.region}
   profile: ${self:custom.stage.profile}
   memorySize: ${self:custom.stage.lambda.memorySize, '128'}
   timeout: ${self:custom.stage.lambda.timeout, '10'}
   logRetentionInDays: ${self:custom.stage.lambda.logRetention, '1'}
-  iamRoleStatements: ${file(config/iamRoleStatements.yml)}
+  iam: ${file(config/iamRoleStatements.yml)}
   deploymentBucket:
     name: com.serverless.${self:custom.stage.profile}.${self:provider.region}.deploys
   apiName: ${self:service}${self:custom.stage.suffix}
   httpApi:
     cors: true
-    payload: '1.0'
+    payload: "1.0"
 
 functions: ${file(lib/config.js):functions}
 resources:
