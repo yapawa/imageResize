@@ -13,28 +13,28 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "7.18.13",
-    "aws-sdk": "2.1205.0",
-    "babel-loader": "8.2.5",
+    "@babel/core": "7.20.2",
+    "aws-sdk": "2.1249.0",
+    "babel-loader": "9.1.0",
     "babel-plugin-source-map-support": "2.2.0",
     "babel-preset-env": "1.7.0",
-    "eslint": "8.23.0",
+    "eslint": "8.27.0",
     "eslint-config-standard": "17.0.0",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "6.0.1",
+    "eslint-plugin-promise": "6.1.1",
     "eslint-plugin-standard": "5.0.0",
     "js-yaml": "4.1.0",
     "lodash": "4.17.21",
-    "serverless": "3.22.0",
+    "serverless": "3.24.1",
     "serverless-deployment-bucket": "1.6.0",
-    "serverless-webpack": "^5.3.3",
+    "serverless-webpack": "5.10.0",
     "webpack": "5.74.0",
-    "webpack-cli": "^4.10.0",
+    "webpack-cli": "4.10.0",
     "webpack-node-externals": "3.0.0"
   },
   "dependencies": {
     "lambda-log": "3.1.0",
-    "sharp": "0.30.7"
+    "sharp": "0.31.2"
   }
 }
