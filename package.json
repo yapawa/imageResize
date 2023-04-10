@@ -14,7 +14,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "7.20.2",
-    "aws-sdk": "2.1249.0",
+    "aws-sdk": "2.1354.0",
     "babel-loader": "9.1.0",
     "babel-plugin-source-map-support": "2.2.0",
     "babel-preset-env": "1.7.0",
